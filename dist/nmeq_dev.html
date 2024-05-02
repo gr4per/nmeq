@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Noise Monitoring Client EQ (Dev)</title>
+<meta id="suviewport" name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/jpeg" href="img/icon.JPG">
+<!--link rel="manifest" href="manifest.json"-->
+<link rel="stylesheet" type="text/css" href="css/nmeq.css">
+<script>
+
+window.onload = () => {
+  'use strict';
+
+  var mvp = document.getElementById('suviewport');
+  let ww=window.innerWidth;
+  let wh=window.innerHeight;
+  console.log("initial window dim by device:" + window.innerWidth + " x " + window.innerHeight);
+  let vpw = 1584;
+  let initialScale = ww/vpw/window.devicePixelRatio;
+  if(ww/wh>1.71) { // we need to scale by height
+    vpw=923*ww/wh;
+    console.log("detected wide screen " + (ww/wh) + " > 1.71:1, setting width to " + vpw + " in order to ensure full height is visible.");
+    mvp.setAttribute('content','width='+vpw); //+', initial-scale=' + initialScale);
+  }
+
+  /*
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker
+    .register('./sw.js')
+    .then(registration => {
+      console.log("SW scope:", registration.scope);
+    });
+  }
+  */
+}
+</script>
+
+</head>
+<body style="margin:0px;overflow:hidden;background-color:black">
+  <div id="root"></div>  
+  <script src="bundle.js"></script>    
+  <script>
+  let _game = document.getElementById("root")._reactRootContainer._internalRoot.current.child.stateNode
+  </script>
+
+</body>
+</html>
